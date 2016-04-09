@@ -14,18 +14,32 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import include, url, patterns
+from rest_framework import routers
 from django.contrib import admin
-from common.api import UsersList
+from common import api
 from common.serializers import UserSerializers
-from common.models import Users
+# from common.models import Users
 
 
-user_urls = patterns('',
-                    url(r'^(?P<username>[0-9a-zA-Z_-]+)/users$', UsersList.as_view(queryset=Users.objects.all(), serializer_class=UserSerializers), name='users')
-                    )
-urlpatterns = patterns('',
-                       url(r'^admin/', include(admin.site.urls)),
-                       url(r'^users/', include(user_urls)),
-                       )
+urlpatterns = [
+    url(r'^users/$', api.user_list),
+    # url(r'^users/(?<>P[0-9]+)/$', api.user_detail)
+]
+
+# router = routers.DefaultRouter()
+# router.register(r'users', UserViewSet)
+# router.register(r'groups', GroupViewSet)
+# # user_urls = patterns('',
+# #                     url(r'^(?P<username>[0-9a-zA-Z_-]+)/users$', UsersList.as_view(queryset=Users.objects.all(), serializer_class=UserSerializers), name='users')
+# #                     )
+# urlpatterns = patterns('',
+#                        url(r'^admin/', include(admin.site.urls)),
+#                        # url(r'^users/', include(user_urls)),
+#                        )
+#
+# urlpatterns += [
+#                 url(r'^', include(router.urls)),
+#                 url(r'api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+#              ]
 
 
