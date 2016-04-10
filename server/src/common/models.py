@@ -1,9 +1,4 @@
 from django.db import models
-from pygments.lexers import get_all_lexers
-from datetime import datetime
-# from serializers import UserSerializers
-from django.utils import timezone
-from django.core.validators import MaxValueValidator, MinValueValidator
 
 class Users(models.Model):
     created_at_time = models.DateTimeField(auto_now_add=True)

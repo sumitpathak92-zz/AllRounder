@@ -1,7 +1,3 @@
-from rest_framework import generics, permissions, viewsets
-from django.contrib.auth.models import User, Group
-from .serializers import UserSerializers
-# from .models import Users, ServicesMappedTo
 from .models import Users
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
@@ -23,14 +19,14 @@ class JSONResponse(HttpResponse):
 @csrf_exempt
 def user_list(request):
     """
-
+    Return the User list
     """
-    if request.method=='GET':
+    if request.method == 'GET':
         users = Users.objects.all()
         serializer = UserSerializers(users, many=True)
         return JSONResponse(serializer.data)
 
-    elif request.method=='POST':
+    elif request.method == 'POST':
         data = JSONParser().parse(request)
         serializer = UserSerializers(data=data)
         if serializer.is_valid():
