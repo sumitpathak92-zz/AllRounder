@@ -1,59 +1,61 @@
 from .models import Users
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework.renderers import JSONRenderer
-from rest_framework.parsers import JSONParser
-from django.http import HttpResponse
 from .serializers import UserSerializers
-
-class JSONResponse(HttpResponse):
-    """
-    An HTTPResponse that renders its contents into JSON
-    """
-
-    def __init__(self, data, **kwargs):
-        content = JSONRenderer().render(data)
-        kwargs['content_type'] = 'application/json'
-        super(JSONResponse, self).__init__(content, **kwargs)
+from django.http import Http404
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from django.views.generic.base import TemplateView
 
 
-@csrf_exempt
-def user_list(request):
+class IndexView(TemplateView):
+    template_name = 'index.html'
+    # def get_context_data(self, **kwargs):
+    #     context = super(IndexView,self).get_context_data(**kwargs)
+    #     return context
+    # # def dispatch(self, *args, **kwargs):
+    # #     return super(IndexView, self).dispatch(*args, **kwargs)
+
+
+class UserList(APIView):
     """
-    Return the User list
+    List all users or create a new user
     """
-    if request.method == 'GET':
+
+    def get(self, request, format=None):
         users = Users.objects.all()
         serializer = UserSerializers(users, many=True)
-        return JSONResponse(serializer.data)
+        return Response(serializer.data)
 
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = UserSerializers(data=data)
+
+    def post(self, request, format=None):
+        serializer = UserSerializers(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return JSONResponse(serializer.data, status=201)
-        return JSONResponse(serializer.errors, status=400)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@csrf_exempt
-def user_detail(request):
-    try:
-        users = Users.objects.get()
-    except Users.DoesNotExist:
-        return HttpResponse(status=404)
+class UserDetails(APIView):
+    def get_object(self, pk):
+        try:
+            return Users.objects.get(pk= pk)
+        except Users.DoesNotExist:
+            raise Http404
 
-    if request.method == 'GET':
+    def get(self, request, pk, format=None):
+        users = self.get_object(pk)
         serializer = UserSerializers(users)
-        return JSONResponse(serializer.data)
+        return Response(serializer.data)
 
-    if request.method == 'PUT':
-        data = JSONParser().parse(request)
-        serializer = UserSerializers(users, data=data)
+    def put(self, request, pk, format=None):
+        users = self.get_object(pk)
+        serializer = UserSerializers(users, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return JSONResponse(serializer.data)
-        return JSONResponse(serializer.errors, status=404)
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    elif request.method == 'DELETE':
+    def delete(self, request, pk, format=None):
+        users = self.get_object(pk)
         users.delete()
-        return HttpResponse(status=204)
+        return Response(status=status.HTTP_204_NO_CONTENT)

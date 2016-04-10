@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'rest_framework',
 )
 
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
     'PAGE_SIZE': 10
@@ -63,7 +64,9 @@ ROOT_URLCONF = 'urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            '/media/sumit/camouflage/sumit/AllRounder/client/src'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
