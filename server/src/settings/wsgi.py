@@ -1,5 +1,5 @@
 """
-WSGI config for AIlifesaver project.
+WSGI config for AllRounder project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
