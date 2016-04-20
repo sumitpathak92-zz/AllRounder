@@ -1,0 +1,4 @@
+﻿
+
+
+INSERT INTO users VALUES (2, 'rohan agarwal', 'rohan.agarwal@iquanti.com', 24, 'mahadevpura', 'no', 's3_bucket_path', 3.35566, 9.33455, 'male', 'yes', 'gardening', 'bangalore', 'karnataka', 560032)

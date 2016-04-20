@@ -13,10 +13,10 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
-from django.conf.urls import include, url, patterns
+from django.conf.urls import url
 from common import api
 from rest_framework.urlpatterns import format_suffix_patterns
-
+from django.contrib import admin
 
 urlpatterns = [
     url(r'^users/$', api.UserList.as_view()),
@@ -24,7 +24,11 @@ urlpatterns = [
     # url(r'^users/(?<>P[0-9]+)/$', api.user_detail)
 ]
 urlpatterns += [
-    url(r'^.*$', api.IndexView.as_view(template_name='index.html'), name='index')
+    url(r'^.*$', api.IndexView.as_view(template_name='index.html'), name='index'),
+]
+
+urlpatterns += [
+    url(r'^admin/', admin.site.urls),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
