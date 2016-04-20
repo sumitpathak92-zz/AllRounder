@@ -6,7 +6,7 @@ class AllrounderUser(models.Model):
     age = models.IntegerField(blank=False)
     address = models.CharField(max_length=50, blank=False)
     is_service_provider = models.BooleanField(blank=False, default=False)
-    image_path = models.CharField(default='s3_image_path', blank=True)
+    image_path = models.CharField(max_length=100, default='s3_image_path', blank=True)
     lat = models.FloatField(blank=False)
     lon = models.FloatField(blank=False)
     gender = models.CharField(max_length=10)
@@ -14,7 +14,7 @@ class AllrounderUser(models.Model):
     services_used = models.CharField(max_length=20, blank=False)
     city = models.CharField(max_length=20)
     state = models.CharField(max_length=20)
-    pincode = models.IntegerField(max_length=10, blank=False)
+    pincode = models.IntegerField(blank=False)
     
     class Meta:
         managed = True

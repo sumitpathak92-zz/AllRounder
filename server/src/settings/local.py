@@ -40,13 +40,15 @@ INSTALLED_APPS = (
     'common',
     'apps.users',
     'rest_framework',
+    'rest_framework.authtoken',
 )
 
 
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
-    'PAGE_SIZE': 10
-}
+# REST_FRAMEWORK = {
+#     # 'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework.authentication.TokenAuthentication',),
+#     # 'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+#     'PAGE_SIZE': 10
+# }
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
