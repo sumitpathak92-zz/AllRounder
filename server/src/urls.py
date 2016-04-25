@@ -29,7 +29,7 @@ urlpatterns = [
     # url(r'^users/(?<>P[0-9]+)/$', api.user_detail)
 ]
 urlpatterns += [
-    url(r'^', api.IndexView.as_view(template_name='index.html'), name='index'),
+    url(r'^', api.IndexView.as_view(template_name='login.html'), name='login'),
 ]
 
 urlpatterns += [

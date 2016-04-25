@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'common',
     'apps.users',
+    'apps.services',
     'rest_framework',
     'rest_framework.authtoken',
 )
@@ -67,7 +68,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            '/media/sumit/camouflage/sumit/AllRounder/client/src'
+            '/media/sumit/camouflage/sumit/AllRounder/client/src/app/modules/login'
         ],
         'APP_DIRS': True,
         'OPTIONS': {

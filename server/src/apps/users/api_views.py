@@ -12,7 +12,7 @@ class AllrounderUserAPI(APIView):
     """
 
     def get(self, request, format=None):
-        print "getting all users"
+        # print "getting all users"
         users = AllrounderUser.objects.all()
         user_serializer = AllrounderUserSerializer(users, many=True)
         return Response(user_serializer.data)
@@ -24,13 +24,13 @@ class AllrounderUserDetailAPI(APIView):
 
     def get_user_details(self, id):
         try:
-            print "ppppp",AllrounderUser.objects.get(id=id)
+            # print "ppppp",AllrounderUser.objects.get(id=id)
             return AllrounderUser.objects.get(id=id)
         except AllrounderUser.DoesNotExist:
             raise Http404
 
     def get(self, request, id, format=None):
-        print "getting user with id ", id
+        # print "getting user with id ", id
         user = self.get_user_details(id)
         user_serializer = AllrounderUserSerializer(user)
         return Response(user_serializer.data)
