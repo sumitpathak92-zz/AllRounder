@@ -68,7 +68,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            '/media/sumit/camouflage/sumit/AllRounder/client/src/app/modules/login'
+            '/media/sumit/camouflage1/sumit/AllRounder/client/src/app/modules/login'
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -105,6 +105,18 @@ DATABASES = {
         'PORT': '',
     }
 }
+
+# Settings for Neo4js
+
+NEO4J_DATABASES = {
+    'default': {
+        'HOST': 'localhost',
+        'PORT': 7474,
+        'ENDPOINT': '/db/data'
+    }
+}
+
+DATABASE_ROUTERS = ['neo4django.utils.Neo4djangoIntegrationRouter']
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
