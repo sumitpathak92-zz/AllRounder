@@ -1,5 +1,5 @@
 from django.db import models
-from neo4django.db import models
+# from neo4j.db import models
 
 class Users(models.Model):
     created_at_time = models.DateTimeField(auto_now_add=True)
@@ -12,9 +12,9 @@ class Users(models.Model):
         ordering = ('created_at_time',)
 
 
-# neo4j model for a person
-class Person(models.NodeModel):
-    name = models.StringProperty()
-    age = models.IntegerProperty()
-
-    friends = models.Relationship('self', rel_type='friends_with')
+# # neo4j model for a person
+# class Person(models.NodeModel):
+#     name = models.StringProperty()
+#     age = models.IntegerProperty()
+#
+#     friends = models.Relationship('self', rel_type='friends_with')

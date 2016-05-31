@@ -2,7 +2,7 @@ from django.db import models
 
 from django.db import models
 from django.core.urlresolvers import reverse
-from server.src.settings import db
+from settings import db
 
 
 class AllrounderUser(models.Model):
